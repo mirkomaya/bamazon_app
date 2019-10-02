@@ -1,0 +1,22 @@
+{
+  "name": "bamazon_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mirkomaya/bamazon_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mirkomaya/bamazon_app/issues"
+  },
+  "homepage": "https://github.com/mirkomaya/bamazon_app#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}
