@@ -26,12 +26,24 @@ connection.connect(function(err) {
     connection.query("SELECT * FROM products", function(err, res) {
       if (err) throw err;
 
-      var productList = `
-      Item ID: ${res[0].item_id}'
+    for (var i = 0; i < res.length; i++) {
 
-      `;
+        var productList = `
+item: ${res[i].item_id}
+`
+        console.log(productList)
+        // console.log(res[i].item_id);
+        // console.log(res[i].product_name);
+        // console.log(res[i].item_id);
+        // console.log(res[i].item_id);
+      }
 
-      console.log(productList);
+//       var productList = `
+// Item ID: ${res[0].item_id}
+
+//       `;
+
+    //   console.log(productList);
       connection.end();
     });
   }
