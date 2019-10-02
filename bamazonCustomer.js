@@ -19,13 +19,19 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    afterConnection();
+    displayProducts();
   });
   
-  function afterConnection() {
+  function displayProducts() {
     connection.query("SELECT * FROM products", function(err, res) {
       if (err) throw err;
-      console.log(res);
+
+      var productList = `
+      Item ID: ${res[0].item_id}'
+
+      `;
+
+      console.log(productList);
       connection.end();
     });
   }
