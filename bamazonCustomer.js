@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 
-// var inquirer = require("inquirer");
+var inquirer = require("inquirer");
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -29,7 +29,7 @@ function displayProducts() {
         for (var i = 0; i < res.length; i++) {
 
             var productList = `
-Item ID:         ${res[i].item_id}
+Product ID:      ${res[i].item_id}
 Product Name:    ${res[i].product_name}
 Department Name: ${res[i].department_name}
 Price:           ${res[i].price}
@@ -37,6 +37,27 @@ Stock Quanity:   ${res[i].stock_quantity}
 `
             console.log(productList)
         }
+        displayMessages();
+    });
+}
+
+function displayMessages() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "productID",
+            message: "What is the Product ID of the product you would like to buy?",
+        },
+
+        {
+            type: "input",
+            name: "productAmt",
+            message: "How many units would you like to buy?"
+
+        }
+    ]).then(function (answer) {
+        console.log(answer);
         connection.end();
     });
 }
+
