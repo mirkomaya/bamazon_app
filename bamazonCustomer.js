@@ -37,27 +37,81 @@ Stock Quanity:   ${res[i].stock_quantity}
 `
             console.log(productList)
         }
-        displayMessages();
+        productMessage();
     });
 }
 
-function displayMessages() {
-    inquirer.prompt([
-        {
+// function displayMessages() {
+//     inquirer.prompt([
+//         {
+//             type: "input",
+//             name: "productID",
+//             message: "What is the Product ID of the product you would like to buy?",
+//         },
+
+//         {
+//             type: "input",
+//             name: "productAmt",
+//             message: "How many units would you like to buy?"
+
+//         }
+//     ]).then(function (answer) {
+//         console.log(answer);
+//         connection.end();
+//     });
+// }
+
+function productMessage() {
+    inquirer
+        .prompt({
             type: "input",
             name: "productID",
-            message: "What is the Product ID of the product you would like to buy?",
-        },
+            message: "What is the Product ID of the product you would like to buy?"
+        })
+        .then(function (answer) {
+            // console.log(answer.productID);
+            connection.query("SELECT * FROM products WHERE ?", { item_id: answer.productID }, function (err, res) {
+                if (err) throw err;
+                console.log(`
+Product ID:      ${res[0].item_id}
+Product Name:    ${res[0].product_name}
+Department Name: ${res[0].department_name}
+Price:           ${res[0].price}
+Stock Quanity:   ${res[0].stock_quantity}
+          `);
+                //   runSearch();
+                amountMessage();
+                // connection.end();
+            });
+        });
+}
 
-        {
+function amountMessage() {
+    inquirer
+        .prompt({
             type: "input",
             name: "productAmt",
             message: "How many units would you like to buy?"
-
-        }
-    ]).then(function (answer) {
-        console.log(answer);
-        connection.end();
-    });
+        })
+        .then(function (answer) {
+            // console.log(answer.productAmt);
+            connection.query("SELECT * FROM products WHERE ?", { stock_quantity: answer.productAmt }, function (err, res) {
+                if (err) throw err;
+                console.log(res[0].stock_quantity);
+                console.log(answer.productAmt);
+                //   runSearch();
+                connection.end();
+            });
+        });
 }
+
+
+
+
+// Product ID:      ${res[i].item_id}
+// Product Name:    ${res[i].product_name}
+// Department Name: ${res[i].department_name}
+// Price:           ${res[i].price}
+// Stock Quanity:   ${res[i].stock_quantity}
+
 
