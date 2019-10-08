@@ -78,13 +78,13 @@ function productMessage() {
             // console.log(answer.productID);
             connection.query("SELECT * FROM products WHERE ?", { item_id: answer.productID }, function (err, res) {
                 if (err) throw err;
-                console.log(`
-Product ID:      ${res[0].item_id}
-Product Name:    ${res[0].product_name}
-Department Name: ${res[0].department_name}
-Price:           ${res[0].price}
-Stock Quanity:   ${res[0].stock_quantity}
-          `);
+//                 console.log(`
+// Product ID:      ${res[0].item_id}
+// Product Name:    ${res[0].product_name}
+// Department Name: ${res[0].department_name}
+// Price:           ${res[0].price}
+// Stock Quanity:   ${res[0].stock_quantity}
+//           `);
 
                 // connection.query("SELECT * FROM products WHERE ?", { stock_quantity: answer.productAmt }, function (err, res) {
                 //     if (err) throw err;
@@ -93,14 +93,19 @@ Stock Quanity:   ${res[0].stock_quantity}
                 //     // amountMessage();
                 //     connection.end();
                 // });
+                console.log(`
+Product Name: ${res[0].product_name}
+
+Stock Quanity: ${res[0].stock_quantity}
+`);
                 console.log("User would like to buy: " + answer.productAmt + " amount")
-                console.log(`${res[0].stock_quantity} is left`)
+                // console.log(`${res[0].stock_quantity} is left`)
                 connection.end();
 
             });
 
         })
-    }
+}
 
 // function amountMessage() {
 //     inquirer
